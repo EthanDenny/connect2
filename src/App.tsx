@@ -20,6 +20,11 @@ import { collide } from "./collide.js";
 import "reactflow/dist/style.css";
 
 import TextUpdaterNode from "./TextUpdaterNode.js";
+import "./App.css";
+
+const nodeTypes = {
+  textUpdater: TextUpdaterNode,
+};
 
 const initialNodes = [
   {
@@ -131,9 +136,7 @@ const App = () => {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        nodeTypes={{
-          textUpdater: TextUpdaterNode,
-        }}
+        nodeTypes={nodeTypes}
       />
     </div>
   );

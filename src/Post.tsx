@@ -1,4 +1,5 @@
 import "./Post.css";
+
 const Post = ({
   postStyle,
   image,

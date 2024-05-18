@@ -1,5 +1,5 @@
 import { getBezierPath } from "reactflow";
-import { getEdgeParams } from "./utils.ts";
+import getEdgeParams from "./EdgeParams.ts";
 
 function FloatingConnectionLine({
   toX,

@@ -1,4 +1,4 @@
-import { Position, MarkerType } from "reactflow";
+import { Position } from "reactflow";
 
 // this helper function returns the intersection point
 // of the line between the center of the intersectionNode and the target node
@@ -55,7 +55,7 @@ function getEdgePosition(node: any, intersectionPoint: any) {
 }
 
 // returns the parameters (sx, sy, tx, ty, sourcePos, targetPos) you need to create an edge
-export function getEdgeParams(source: any, target: any) {
+export default function getEdgeParams(source: any, target: any) {
   const sourceIntersectionPoint = getNodeIntersection(source, target);
   const targetIntersectionPoint = getNodeIntersection(target, source);
 
@@ -70,43 +70,4 @@ export function getEdgeParams(source: any, target: any) {
     sourcePos,
     targetPos,
   };
-}
-
-export function createNodesAndEdges() {
-  const nodes = [];
-  const edges = [];
-  const center = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-
-  nodes.push({
-    id: "target",
-    type: "post",
-    data: { label: "Target" },
-    position: center,
-  });
-
-  for (let i = 0; i < 8; i++) {
-    const degrees = i * (360 / 8);
-    const radians = degrees * (Math.PI / 180);
-    const x = 250 * Math.cos(radians) + center.x;
-    const y = 250 * Math.sin(radians) + center.y;
-
-    nodes.push({
-      id: `${i}`,
-      type: "post",
-      data: { label: "Source" },
-      position: { x, y },
-    });
-
-    edges.push({
-      id: `edge-${i}`,
-      target: "target",
-      source: `${i}`,
-      type: "floating",
-      markerEnd: {
-        type: MarkerType.Arrow,
-      },
-    });
-  }
-
-  return { nodes, edges };
 }

@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useStore, getBezierPath } from "reactflow";
 
-import { getEdgeParams } from "./utils.ts";
+import getEdgeParams from "./EdgeParams.ts";
 
 function FloatingEdge({
   id,

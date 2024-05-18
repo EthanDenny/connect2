@@ -13,7 +13,6 @@ import "reactflow/dist/style.css";
 
 import FloatingEdge from "./FloatingEdge.tsx";
 import FloatingConnectionLine from "./FloatingConnectionLine.tsx";
-import { createNodesAndEdges } from "./utils.ts";
 
 import Post from "./Post.tsx";
 import "./App.css";
@@ -26,15 +25,25 @@ const edgeTypes = {
   floating: FloatingEdge,
 };
 
-const { nodes: initialNodes, edges: initialEdges } = createNodesAndEdges();
-
-let id = 20;
+let id = 1;
 const getId = () => `${id++}`;
+
+const initialNodes = [
+  {
+    id: getId(),
+    type: "post",
+    data: { text: "Target" },
+    position: {
+      x: window.innerWidth / 2 - 150,
+      y: window.innerHeight / 2 - 200,
+    },
+  },
+];
 
 const Main = () => {
   const connectingNodeId = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const { screenToFlowPosition } = useReactFlow();
 
   const onConnect = useCallback(
@@ -65,7 +74,7 @@ const Main = () => {
       if (targetIsPane) {
         // we need to remove the wrapper bounds, in order to get the correct position
         const id = getId();
-        const newNode = {
+        const newNode: any = {
           id,
           type: "post",
           position: screenToFlowPosition({

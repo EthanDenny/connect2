@@ -1,0 +1,17 @@
+.post {
+  /* Box Model */
+  width: 300px;
+  height: 400px;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 0 0 4px 4px black;
+
+  /* Color */
+  background-color: white;
+}
+
+#post-2 {
+  position: absolute;
+  left: 600px;
+  top: 200px;
+}

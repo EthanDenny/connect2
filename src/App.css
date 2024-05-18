@@ -11,16 +11,27 @@
   align-items: center;
 }
 
-.text-updater-node {
-  height: 50px;
-  border: 1px solid #eee;
-  padding: 5px;
-  border-radius: 5px;
-  background: white;
+.react-flow .react-flow__handle {
+  width: 30px;
+  height: 14px;
+  border-radius: 3px;
+  background-color: #784be8;
 }
 
-.text-updater-node label {
-  display: block;
-  color: #777;
-  font-size: 12px;
+.react-flow .react-flow__handle-top {
+  top: -10px;
+}
+
+.react-flow .react-flow__handle-bottom {
+  bottom: -10px;
+}
+
+.react-flow .react-flow__edge path,
+.react-flow__connectionline path {
+  stroke-width: 2;
+}
+
+.wrapper {
+  flex-grow: 1;
+  height: 100%;
 }

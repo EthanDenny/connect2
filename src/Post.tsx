@@ -1,10 +1,7 @@
-import { useCallback } from "react";
 import { Handle, Position } from "reactflow";
 import "./Post.css";
 
 import { NodeProps } from "reactflow";
-
-const handleStyle = { left: 10 };
 
 export type PostData = {
   postStyle: "text" | "image" | "profile";
@@ -14,10 +11,6 @@ export type PostData = {
 
 const Post = (props: NodeProps<PostData>) => {
   const { postStyle, image, text } = props.data;
-
-  const onChange = useCallback((evt) => {
-    console.log(evt.target.value);
-  }, []);
 
   return (
     <div className="post">
@@ -30,6 +23,8 @@ const Post = (props: NodeProps<PostData>) => {
           <PostFooter />
         </>
       )}
+      <Handle type="target" position={Position.Top} />
+      <Handle type="source" position={Position.Bottom} />
     </div>
   );
 };

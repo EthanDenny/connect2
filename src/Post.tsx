@@ -38,6 +38,17 @@ const Post = (props: NodeProps<PostData>) => {
   );
 };
 
+const ProfilePost = () => {
+  return (
+    <div className="profile-post">
+      <div className="profile-img-container">
+        <img className="profile-img" src={profilePic} />
+      </div>
+      <div className="profile-name">Hailey Kinsella</div>
+    </div>
+  );
+};
+
 const TextPost = () => {
   return (
     <>
@@ -70,13 +81,10 @@ const ImagePost = () => {
   );
 };
 
-const ProfilePost = () => {
+const NewPost = () => {
   return (
-    <div className="profile-post">
-      <div className="profile-img-container">
-        <img className="profile-img" src={profilePic} />
-      </div>
-      <div className="profile-name">Hailey Kinsella</div>
+    <div className="new-post">
+      <input />
     </div>
   );
 };

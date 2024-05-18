@@ -65,3 +65,58 @@
   left: 600px;
   top: 200px;
 }
+
+.img-post {
+  border: 30px solid white;
+  border-bottom: 15px solid white;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+}
+
+
+.image-user {
+  font-weight: bold;
+}
+
+
+.img-post-img-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 100%;
+  height: 250px;
+  overflow: hidden;
+} 
+
+.image-post-profile-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+
+}
+
+.image-footer {
+  display: flex;
+  gap:10px;
+  padding-top: 10px;
+}
+
+.image-text{
+  grid-area: text;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow: wrap;
+}
+
+.image-post-img {
+  
+}
+
+

@@ -19,47 +19,47 @@ import { collide } from "./collide.js";
 
 import "reactflow/dist/style.css";
 
-import TextUpdaterNode from "./TextUpdaterNode.js";
+import Post from "./Post.tsx";
 import "./App.css";
 
 const nodeTypes = {
-  textUpdater: TextUpdaterNode,
+  post: Post,
 };
 
 const initialNodes = [
   {
     id: "1",
-    type: "textUpdater",
+    type: "post",
     position: { x: 0, y: 0 },
     data: { label: "1" },
   },
   {
     id: "2",
-    type: "textUpdater",
+    type: "post",
     position: { x: 0, y: 100 },
     data: { label: "2" },
   },
   {
     id: "3",
-    type: "textUpdater",
+    type: "post",
     position: { x: 0, y: 0 },
     data: { label: "1" },
   },
   {
     id: "4",
-    type: "textUpdater",
+    type: "post",
     position: { x: 0, y: 100 },
     data: { label: "2" },
   },
   {
     id: "5",
-    type: "textUpdater",
+    type: "post",
     position: { x: 0, y: 0 },
     data: { label: "1" },
   },
   {
     id: "6",
-    type: "textUpdater",
+    type: "post",
     position: { x: 0, y: 100 },
     data: { label: "2" },
   },

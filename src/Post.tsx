@@ -70,7 +70,16 @@ const ImagePost = () => {
   );
 };
 
-const ProfilePost = () => {};
+const ProfilePost = () => {
+  return (
+    <div className="profile-post">
+      <div className="profile-img-container">
+        <img className="profile-img" src={profilePic} />
+      </div>
+      <div className="profile-name">Hailey Kinsella</div>
+    </div>
+  );
+};
 
 // const PostProfile = () => {
 //   return <></>;

@@ -1,39 +1,63 @@
 // Import
-import { Handle, Position } from 'reactflow';
-import './Post.css';
+import { useState, useEffect } from "react";
+import { Handle, Position, NodeProps } from "reactflow";
 
 // Import Styles
-import './Post.css';
+import "./Post.css";
 
 // Import Images
-import profilePic from '/sample-profile-pic.png';
-
-import { NodeProps } from 'reactflow';
-import { useState } from 'react';
+import profilePic from "/sample-profile-pic.png";
 
 export type PostData = {
-  postStyle: 'text' | 'image' | 'profile' | 'new';
+  postStyle: "text" | "image" | "profile" | "new";
   image?: string;
   text: string;
+  user: string;
 };
 
 // Post Component
 const Post = (props: NodeProps<PostData>) => {
   // Destructure Post Data
-  const [{ postStyle, image, text }, setRealData] = useState(
-    props.data
-  );
+  const [{ postStyle, name, avatar, image, text, user }, setRealData] =
+    useState({ ...props.data, name: "", avatar: "" });
+
+  useEffect(() => {
+    const GetUserData = async () => {
+      return await fetch(
+        'http://127.0.0.1:8090/api/collections/users/records?filter=(id="' +
+          user +
+          '")'
+      )
+        .then((response) => response.json())
+        .then((users) => {
+          setRealData({
+            postStyle: postStyle,
+            name: users.items[0].username.replace("_", " "),
+            avatar:
+              "http://127.0.0.1:8090/api/files/_pb_users_auth_/" +
+              user +
+              "/" +
+              users.items[0].avatar,
+            text: text,
+            user: user,
+            image: image,
+          });
+        });
+    };
+
+    GetUserData();
+  }, [user]);
 
   // ------------------ Render -----------------
   return (
     // Render Post based on the Type
     <div className="post">
-      {postStyle == 'profile' ? (
+      {postStyle == "profile" ? (
         <ProfilePost />
-      ) : postStyle == 'image' ? (
+      ) : postStyle == "image" ? (
         <ImagePost />
-      ) : postStyle == 'text' ? (
-        <TextPost />
+      ) : postStyle == "text" ? (
+        <TextPost name={name} avatar={avatar} text={text} />
       ) : (
         <NewPost setData={setRealData} />
       )}
@@ -54,22 +78,25 @@ const ProfilePost = () => {
   );
 };
 
-const TextPost = () => {
+const TextPost = ({
+  name,
+  avatar,
+  text,
+}: {
+  name: string;
+  avatar: string;
+  text: string;
+}) => {
   return (
     <>
       <div className="text-post">
         <div className="text-post-header">
           <div className="text-post-img-container">
-            <img src={profilePic} className="text-post-img" />
+            <img src={avatar} className="text-post-img" />
           </div>
-          <p>Brittany</p>
+          <p>{name}</p>
         </div>
-        <p className="text-post-content">
-          Live laugh love. This is the dumbest fucking thing I have
-          ever seen. Down with tay tay. She looks like she would clap
-          after the plane lands. This displases me. Travis deserves so
-          much better.
-        </p>
+        <p className="text-post-content">{text}</p>
       </div>
     </>
   );
@@ -99,43 +126,43 @@ const ImagePost = () => {
 const NewPost = ({ setData }: { setData: Function }) => {
   // ---------------- State -------------------------
   const [newPostData, setNewPostData] = useState({
-    postStyle: '',
-    text: '',
-    image: '',
+    postStyle: "",
+    text: "",
+    image: "",
   });
 
   // -------------- Event Handlers ---------------
 
   // Update the post whenever user changes
-  const updateNewText = (event) => {
+  const updateNewText = (event: any) => {
     setNewPostData({
       ...newPostData,
       text: event.target.value,
     });
   };
 
-  const updateImage = (event) => {
+  const updateImage = () => {
     setNewPostData({
       ...newPostData,
-      image: '',
+      image: "",
     });
-    console.log('Image Added');
+    console.log("Image Added");
   };
 
-  const createPost = (newPostData) => {
+  const createPost = (newPostData: any) => {
     // Add Post Data to the state
     // console.log('Post Added');
 
     // Define what type of post we want to create
-    if (newPostData.image !== '') {
+    if (newPostData.image !== "") {
       setNewPostData({
         ...newPostData,
-        postStyle: 'image',
+        postStyle: "image",
       });
     } else {
       setNewPostData({
         ...newPostData,
-        postStyle: 'text',
+        postStyle: "text",
       });
     }
 

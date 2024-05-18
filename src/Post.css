@@ -1,6 +1,11 @@
 .post {
   /* Box Model */
   max-width: 1080px;
+  transition: transform 0.25s ease;
+}
+
+.post:hover {
+  transform: scale(1.15);
 }
 
 /******* Text Post   *********/

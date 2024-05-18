@@ -15,7 +15,7 @@ import ReactFlow, {
   useStore,
 } from "reactflow";
 
-import { collide } from "./collide.js";
+import collide from "./collide.ts";
 
 import "reactflow/dist/style.css";
 
@@ -66,62 +66,9 @@ const initialNodes = [
 ];
 const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];
 
-const simulation = forceSimulation()
-  .force("charge", forceManyBody().strength(-1000))
-  .force("x", forceX().x(0).strength(0.05))
-  .force("y", forceY().y(0).strength(0.05))
-  .force("collide", collide())
-  .alphaTarget(0.05)
-  .stop();
-
-const useLayoutedElements = () => {
-  const { getNodes, setNodes, getEdges, fitView } = useReactFlow();
-  const initialised = useStore((store) =>
-    [...store.nodeInternals.values()].every((node) => node.width && node.height)
-  );
-
-  return useMemo(() => {
-    let nodes = getNodes().map((node) => ({
-      ...node,
-      x: node.position.x,
-      y: node.position.y,
-    }));
-    let edges = getEdges().map((edge) => edge);
-
-    // If React Flow hasn't initialised our nodes with a width and height yet, or
-    // if there are no nodes in the flow, then we can't run the simulation!
-    if (!initialised || nodes.length === 0) return;
-
-    simulation.nodes(nodes).force(
-      "link",
-      forceLink(edges)
-        .id((d) => d.id)
-        .strength(0.05)
-        .distance(100)
-    );
-
-    // The tick function is called every animation frame while the simulation is
-    // running and progresses the simulation one step forward each time.
-    const tick = () => {
-      simulation.tick();
-      setNodes(
-        nodes.map((node) => ({ ...node, position: { x: node.x, y: node.y } }))
-      );
-
-      window.requestAnimationFrame(() => {
-        // If the simulation hasn't be stopped, schedule another tick.
-        tick();
-      });
-    };
-
-    window.requestAnimationFrame(tick);
-  }, [initialised]);
-};
-
 const App = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  useLayoutedElements();
 
   const onConnect = useCallback(
     (params: any) => setEdges((eds: any) => addEdge(params, eds)),

@@ -73,10 +73,18 @@ const TextPost = () => {
 const ImagePost = () => {
   return (
     <div className="img-post">
-      <div className="img-post-profile-container">
-        <img src={profilePic} />
+      <div className="img-post-img-container">
+        <img src={profilePic} className="image-post-img" />
       </div>
-      <div>Hailey Kinsella</div>
+      <div className='image-footer'>
+        <div className="image-post-profile-container">
+          <img src={profilePic}/>
+        </div>
+        <div className='image-text'>
+          <div className='image-user'>Hailey Kinsella</div>
+          <div className='image-caption'>I LOVE DISNEY PRINCESSSS YAY SO MUCH</div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -34,7 +34,7 @@ const initialNodes = [
   {
     id: getId(),
     type: 'post',
-    data: { text: 'Target', postStyle: 'profile' },
+    data: { text: 'Target', postStyle: 'image' },
     position: {
       x: window.innerWidth / 2 - 150,
       y: window.innerHeight / 2 - 200,

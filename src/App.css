@@ -1,12 +1,24 @@
-:root {
-  --canvas-size: 20000px;
+.react-flow .react-flow__handle {
+  width: 30px;
+  height: 14px;
+  border-radius: 3px;
+  background-color: #784be8;
 }
 
-.main {
-  width: var(--canvas-size);
-  height: var(--canvas-size);
-  background-color: gainsboro;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.react-flow .react-flow__handle-top {
+  top: -10px;
+}
+
+.react-flow .react-flow__handle-bottom {
+  bottom: -10px;
+}
+
+.react-flow .react-flow__edge path,
+.react-flow__connectionline path {
+  stroke-width: 2;
+}
+
+.wrapper {
+  flex-grow: 1;
+  height: 100%;
 }

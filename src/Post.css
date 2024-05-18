@@ -1,16 +1,66 @@
 .post {
   /* Box Model */
-  width: 300px;
-  height: 400px;
-  border: 2px solid black;
-  border-radius: 5px;
-  box-shadow: 0 0 4px 4px black;
+  max-width: 1080px;
+  /* border: 1px solid black; */
+  /* border-radius: 5px; */
+  box-shadow: 10px 10px 2px 0px rgba(33, 69, 126, 0.5);
 
   /* Color */
   background-color: white;
 }
 
-#post-2 {
+/******* Text Post   *********/
+.text-post {
+  /* Box Model */
+  /* width: 1080px;
+  height: 458px; */
+
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+}
+
+.text-post-header {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+
+  /* Box Model */
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 0.5em;
+
+  /* Color */
+  color: white;
+  background-color: #102b55;
+}
+.text-post-img-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+  overflow: hidden;
+}
+.text-post-img {
+  /* This allows the image to be responsive to the parent */
+}
+
+.text-post-content {
+  /* Box Model */
+  padding-inline: 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  /*  */
+  width: 45ch;
+
+  /* Typography */
+}
+
+.text-post-content #post-2 {
   position: absolute;
   left: 600px;
   top: 200px;

@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef } from 'react';
 import ReactFlow, {
   addEdge,
   useNodesState,
@@ -8,14 +8,16 @@ import ReactFlow, {
   ConnectionLineComponent,
   useReactFlow,
   ReactFlowProvider,
-} from "reactflow";
-import "reactflow/dist/style.css";
+} from 'reactflow';
+import 'reactflow/dist/style.css';
 
-import FloatingEdge from "./FloatingEdge.tsx";
-import FloatingConnectionLine from "./FloatingConnectionLine.tsx";
+import FloatingEdge from './FloatingEdge.tsx';
+import FloatingConnectionLine from './FloatingConnectionLine.tsx';
 
-import Post from "./Post.tsx";
-import "./App.css";
+import Post from './Post.tsx';
+import './App.css';
+
+import './global.css';
 
 const nodeTypes = {
   post: Post,
@@ -31,8 +33,8 @@ const getId = () => `${id++}`;
 const initialNodes = [
   {
     id: getId(),
-    type: "post",
-    data: { text: "Target" },
+    type: 'post',
+    data: { text: 'Target' },
     position: {
       x: window.innerWidth / 2 - 150,
       y: window.innerHeight / 2 - 200,
@@ -42,7 +44,8 @@ const initialNodes = [
 
 const Main = () => {
   const connectingNodeId = useRef(null);
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [nodes, setNodes, onNodesChange] =
+    useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const { screenToFlowPosition } = useReactFlow();
 
@@ -52,7 +55,7 @@ const Main = () => {
         addEdge(
           {
             ...params,
-            type: "floating",
+            type: 'floating',
             markerEnd: { type: MarkerType.Arrow },
           },
           eds
@@ -61,22 +64,27 @@ const Main = () => {
     [setEdges]
   );
 
-  const onConnectStart = useCallback((_: any, { nodeId }: { nodeId: any }) => {
-    connectingNodeId.current = nodeId;
-  }, []);
+  const onConnectStart = useCallback(
+    (_: any, { nodeId }: { nodeId: any }) => {
+      connectingNodeId.current = nodeId;
+    },
+    []
+  );
 
   const onConnectEnd = useCallback(
     (event: any) => {
       if (!connectingNodeId.current) return;
 
-      const targetIsPane = event.target.classList.contains("react-flow__pane");
+      const targetIsPane = event.target.classList.contains(
+        'react-flow__pane'
+      );
 
       if (targetIsPane) {
         // we need to remove the wrapper bounds, in order to get the correct position
         const id = getId();
         const newNode: any = {
           id,
-          type: "post",
+          type: 'post',
           position: screenToFlowPosition({
             x: event.clientX,
             y: event.clientY,
@@ -89,7 +97,7 @@ const Main = () => {
         setEdges((eds) =>
           eds.concat({
             id,
-            type: "floating",
+            type: 'floating',
             source: connectingNodeId.current,
             target: id,
           } as any)
@@ -100,7 +108,13 @@ const Main = () => {
   );
 
   return (
-    <div className="main">
+    <div
+      style={{
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: '#c4e5fa',
+      }}
+    >
       <ReactFlow
         nodes={nodes}
         edges={edges}

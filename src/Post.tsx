@@ -1,25 +1,27 @@
 // Import
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Handle, Position, NodeProps } from "reactflow";
 
 // Import Styles
 import "./Post.css";
 
 // Import Images
-import profilePic from "/sample-profile-pic.png";
+import profilePic from "/sample-profile-pic.jpeg";
+import tapeImg from "/tapes.svg";
 
 export type PostData = {
   postStyle: "text" | "image" | "profile" | "new";
   image?: string;
   text: string;
   user: string;
+  id: string;
 };
 
 // Post Component
 const Post = (props: NodeProps<PostData>) => {
   // Destructure Post Data
-  const [{ postStyle, name, avatar, image, text, user }, setRealData] =
-    useState({ ...props.data, name: "", avatar: "" });
+  const [{ id, postStyle, name, avatar, image, text, user }, setRealData] =
+    useState({ ...props.data, name: "", avatar: profilePic });
 
   useEffect(() => {
     const GetUserData = async () => {
@@ -40,7 +42,12 @@ const Post = (props: NodeProps<PostData>) => {
               users.items[0].avatar,
             text: text,
             user: user,
-            image: image,
+            image:
+              "http://127.0.0.1:8090/api/files/ty1dhzrx959f82n/" +
+              id +
+              "/" +
+              image,
+            id: id,
           });
         });
     };
@@ -55,7 +62,12 @@ const Post = (props: NodeProps<PostData>) => {
       {postStyle == "profile" ? (
         <ProfilePost />
       ) : postStyle == "image" ? (
-        <ImagePost />
+        <ImagePost
+          name={name}
+          avatar={avatar}
+          text={text}
+          image={image ? image : ""}
+        />
       ) : postStyle == "text" ? (
         <TextPost name={name} avatar={avatar} text={text} />
       ) : (
@@ -70,10 +82,26 @@ const Post = (props: NodeProps<PostData>) => {
 const ProfilePost = () => {
   return (
     <div className="profile-post">
-      <div className="profile-img-container">
-        <img className="profile-img" src={profilePic} />
+      {/* Tape */}
+      <img src={tapeImg} className="tape-img" />
+
+      {/* Container */}
+      <div className="profile-container">
+        <div className="relative-box">
+          <div className="profile-img-container">
+            <img className="profile-img" src={profilePic} />
+          </div>
+          <div className="profile-name">Person's Name</div>
+        </div>
       </div>
-      <div className="profile-name">Hailey Kinsella</div>
+
+      {/* Bio */}
+      <div className="profile-bio">
+        Hi my name is becky and I like to dance to death metal :3
+      </div>
+
+      {/* Tape */}
+      <img src={tapeImg} className="bottom-tape" />
     </div>
   );
 };
@@ -102,21 +130,29 @@ const TextPost = ({
   );
 };
 
-const ImagePost = () => {
+const ImagePost = ({
+  image,
+  name,
+  text,
+  avatar,
+}: {
+  image: string;
+  name: string;
+  text: string;
+  avatar: string;
+}) => {
   return (
     <div className="img-post">
       <div className="img-post-img-container">
-        <img src={profilePic} className="image-post-img" />
+        <img src={image} className="image-post-img" />
       </div>
       <div className="image-footer">
         <div className="image-post-profile-container">
-          <img src={profilePic} />
+          <img src={avatar} />
         </div>
         <div className="image-text">
-          <div className="image-user">Hailey Kinsella</div>
-          <div className="image-caption">
-            I LOVE DISNEY PRINCESSSS YAY SO MUCH
-          </div>
+          <div className="image-user">{name}</div>
+          <div className="image-caption">{text}</div>
         </div>
       </div>
     </div>
@@ -153,6 +189,11 @@ const NewPost = ({ setData }: { setData: Function }) => {
     // Add Post Data to the state
     // console.log('Post Added');
 
+    setNewPostData({
+      ...newPostData,
+      image: { profilePic },
+    });
+
     // Define what type of post we want to create
     if (newPostData.image !== "") {
       setNewPostData({
@@ -180,7 +221,7 @@ const NewPost = ({ setData }: { setData: Function }) => {
         }}
       >
         <textarea
-          placeholder="What is on your mind ?"
+          placeholder="What's on your mind ?"
           value={newPostData.text}
           onChange={updateNewText}
         />
@@ -198,25 +239,5 @@ const NewPost = ({ setData }: { setData: Function }) => {
     </div>
   );
 };
-
-// const PostProfile = () => {
-//   return <></>;
-// };
-
-// const PostImage = () => {
-//   return <></>;
-// };
-
-// const PostText = ({ text }: { text: string }) => {
-//   return (
-//     <>
-//       <p>{text}</p>
-//     </>
-//   );
-// };
-
-// const PostFooter = () => {
-//   return <></>;
-// };
 
 export default Post;

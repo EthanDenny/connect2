@@ -1,12 +1,12 @@
 // Import
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Handle, Position, NodeProps } from "reactflow";
 
 // Import Styles
 import "./Post.css";
 
 // Import Images
-import profilePic from "/sample-profile-pic.png";
+import profilePic from "/sample-profile-pic.jpeg";
 import tapeImg from "/tapes.svg";
 
 export type PostData = {
@@ -20,7 +20,7 @@ export type PostData = {
 const Post = (props: NodeProps<PostData>) => {
   // Destructure Post Data
   const [{ postStyle, name, avatar, image, text, user }, setRealData] =
-    useState({ ...props.data, name: "", avatar: "" });
+    useState({ ...props.data, name: "", avatar: profilePic });
 
   useEffect(() => {
     const GetUserData = async () => {

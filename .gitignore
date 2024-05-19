@@ -11,7 +11,6 @@ node_modules
 dist
 dist-ssr
 *.local
-pb_data
 
 # Editor directories and files
 .vscode/*
@@ -25,3 +24,9 @@ pb_data
 *.sw?
 
 pocketbase.exe
+pb_data/data.db
+pb_data/data.db-shm
+pb_data/data.db-wal
+pb_data/logs.db
+pb_data/logs.db-shm
+pb_data/logs.db-wal

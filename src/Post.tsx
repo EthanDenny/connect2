@@ -7,6 +7,7 @@ import "./Post.css";
 
 // Import Images
 import profilePic from "/sample-profile-pic.png";
+import tapeImg from "/tapes.svg";
 
 export type PostData = {
   postStyle: "text" | "image" | "profile" | "new";
@@ -55,7 +56,7 @@ const Post = (props: NodeProps<PostData>) => {
       {postStyle == "profile" ? (
         <ProfilePost />
       ) : postStyle == "image" ? (
-        <ImagePost />
+        <ImagePost image={image ? image : ""} />
       ) : postStyle == "text" ? (
         <TextPost name={name} avatar={avatar} text={text} />
       ) : (
@@ -70,10 +71,26 @@ const Post = (props: NodeProps<PostData>) => {
 const ProfilePost = () => {
   return (
     <div className="profile-post">
-      <div className="profile-img-container">
-        <img className="profile-img" src={profilePic} />
+      {/* Tape */}
+      <img src={tapeImg} className="tape-img" />
+
+      {/* Container */}
+      <div className="profile-container">
+        <div className="relative-box">
+          <div className="profile-img-container">
+            <img className="profile-img" src={profilePic} />
+          </div>
+          <div className="profile-name">Person's Name</div>
+        </div>
       </div>
-      <div className="profile-name">Hailey Kinsella</div>
+
+      {/* Bio */}
+      <div className="profile-bio">
+        Hi my name is becky and I like to dance to death metal :3
+      </div>
+
+      {/* Tape */}
+      <img src={tapeImg} className="bottom-tape" />
     </div>
   );
 };
@@ -102,11 +119,11 @@ const TextPost = ({
   );
 };
 
-const ImagePost = () => {
+const ImagePost = ({ image }: { image: string }) => {
   return (
     <div className="img-post">
       <div className="img-post-img-container">
-        <img src={profilePic} className="image-post-img" />
+        <img src={image} className="image-post-img" />
       </div>
       <div className="image-footer">
         <div className="image-post-profile-container">
@@ -153,6 +170,11 @@ const NewPost = ({ setData }: { setData: Function }) => {
     // Add Post Data to the state
     // console.log('Post Added');
 
+    setNewPostData({
+      ...newPostData,
+      image: { profilePic },
+    });
+
     // Define what type of post we want to create
     if (newPostData.image !== "") {
       setNewPostData({
@@ -198,25 +220,5 @@ const NewPost = ({ setData }: { setData: Function }) => {
     </div>
   );
 };
-
-// const PostProfile = () => {
-//   return <></>;
-// };
-
-// const PostImage = () => {
-//   return <></>;
-// };
-
-// const PostText = ({ text }: { text: string }) => {
-//   return (
-//     <>
-//       <p>{text}</p>
-//     </>
-//   );
-// };
-
-// const PostFooter = () => {
-//   return <></>;
-// };
 
 export default Post;

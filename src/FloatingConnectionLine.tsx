@@ -40,8 +40,8 @@ function FloatingConnectionLine({
       <path
         fill="none"
         stroke="#222"
-        strokeWidth={1.5}
-        className="animated"
+        strokeWidth={6}
+        strokeDasharray={20}
         d={edgePath}
       />
       <circle

@@ -221,7 +221,7 @@ const NewPost = ({ setData }: { setData: Function }) => {
         }}
       >
         <textarea
-          placeholder="What is on your mind ?"
+          placeholder="What's on your mind ?"
           value={newPostData.text}
           onChange={updateNewText}
         />

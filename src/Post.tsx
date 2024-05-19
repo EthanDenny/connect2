@@ -71,7 +71,7 @@ const Post = (props: NodeProps<PostData>) => {
       ) : postStyle == "text" ? (
         <TextPost name={name} avatar={avatar} text={text} />
       ) : (
-        <NewPost setData={setRealData} />
+        <NewPost name={"You"} avatar={avatar} setData={setRealData} />
       )}
       <Handle type="target" position={Position.Top} />
       <Handle type="source" position={Position.Bottom} />
@@ -116,17 +116,15 @@ const TextPost = ({
   text: string;
 }) => {
   return (
-    <>
-      <div className="text-post">
-        <div className="text-post-header">
-          <div className="text-post-img-container">
-            <img src={avatar} className="text-post-img" />
-          </div>
-          <p>{name}</p>
+    <div className="text-post">
+      <div className="text-post-header">
+        <div className="text-post-img-container">
+          <img src={avatar} className="text-post-img" />
         </div>
-        <p className="text-post-content">{text}</p>
+        <p>{name}</p>
       </div>
-    </>
+      <p className="text-post-content">{text}</p>
+    </div>
   );
 };
 
@@ -159,12 +157,22 @@ const ImagePost = ({
   );
 };
 
-const NewPost = ({ setData }: { setData: Function }) => {
+const NewPost = ({
+  name,
+  avatar,
+  setData,
+}: {
+  name: string;
+  avatar: string;
+  setData: Function;
+}) => {
   // ---------------- State -------------------------
   const [newPostData, setNewPostData] = useState({
     postStyle: "",
     text: "",
     image: "",
+    avatar: avatar,
+    name: name,
   });
 
   // -------------- Event Handlers ---------------
@@ -220,21 +228,33 @@ const NewPost = ({ setData }: { setData: Function }) => {
           createPost(newPostData);
         }}
       >
-        <textarea
-          placeholder="What's on your mind ?"
-          value={newPostData.text}
-          onChange={updateNewText}
-        />
-        <img />
-        <div className="new-post-footer">
-          <button type="button" className="btn">
-            Add Image
-          </button>
-          <button type="submit" className="btn">
-            Post
-          </button>
+        <div className="new-container">
+          <div className="text-post-header">
+            <div className="text-post-img-container">
+              <img src={avatar} className="text-post-img" />
+            </div>
+            <p>{name}</p>
+          </div>
+
+          <div className="text-area-wrapper">
+            <textarea
+              className="text-input"
+              placeholder="What's on your mind ?"
+              value={newPostData.text}
+              onChange={updateNewText}
+            />
+
+            <div className="new-post-footer">
+              <button type="button" className="btn">
+                Cancel
+              </button>
+              <button type="submit" className="btn">
+                Post
+              </button>
+            </div>
+          </div>
         </div>
-        <p>{newPostData.text}</p>
+        {/* <p>{newPostData.text}</p> */}
       </form>
     </div>
   );

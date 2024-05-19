@@ -174,7 +174,7 @@ const Main = () => {
                 x: position.x + Math.floor(Math.random() * 3) - 1,
                 y: position.y + Math.floor(Math.random() * 3) - 1,
               };
-            } else if (attempts < 50) {
+            } else if (attempts < 200) {
               return {
                 x: position.x + Math.floor(Math.random() * 5) - 2,
                 y: position.y + Math.floor(Math.random() * 5) - 2,

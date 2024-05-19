@@ -26,7 +26,7 @@ const Post = (props: NodeProps<PostData>) => {
   useEffect(() => {
     const GetUserData = async () => {
       return await fetch(
-        'https://0cf4-2607-fea8-d5c3-7d80-9d0-c0e4-deda-8c8f.ngrok-free.app//api/collections/users/records?filter=(id="' +
+        'https://0cf4-2607-fea8-d5c3-7d80-9d0-c0e4-deda-8c8f.ngrok-free.app/api/collections/users/records?filter=(id="' +
           user +
           '")'
       )
@@ -36,14 +36,14 @@ const Post = (props: NodeProps<PostData>) => {
             postStyle: postStyle,
             name: users.items[0].username.replace("_", " "),
             avatar:
-              "https://0cf4-2607-fea8-d5c3-7d80-9d0-c0e4-deda-8c8f.ngrok-free.app//api/files/_pb_users_auth_/" +
+              "https://0cf4-2607-fea8-d5c3-7d80-9d0-c0e4-deda-8c8f.ngrok-free.app/api/files/_pb_users_auth_/" +
               user +
               "/" +
               users.items[0].avatar,
             text: text,
             user: user,
             image:
-              "https://0cf4-2607-fea8-d5c3-7d80-9d0-c0e4-deda-8c8f.ngrok-free.app//api/files/ty1dhzrx959f82n/" +
+              "https://0cf4-2607-fea8-d5c3-7d80-9d0-c0e4-deda-8c8f.ngrok-free.app/api/files/ty1dhzrx959f82n/" +
               id +
               "/" +
               image,

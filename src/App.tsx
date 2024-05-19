@@ -48,7 +48,7 @@ const Main = () => {
 
     const GetPosts = async (count: number) => {
       const edgesData = await fetch(
-        "https://0cf4-2607-fea8-d5c3-7d80-9d0-c0e4-deda-8c8f.ngrok-free.app//api/collections/edges/records?perPage=100",
+        "https://0cf4-2607-fea8-d5c3-7d80-9d0-c0e4-deda-8c8f.ngrok-free.app/api/collections/edges/records?perPage=100",
         {
           headers: {
             "Content-Type": "application/json",
@@ -83,7 +83,7 @@ const Main = () => {
       let idMap: any = {};
 
       let nodeIds = await fetch(
-        "https://0cf4-2607-fea8-d5c3-7d80-9d0-c0e4-deda-8c8f.ngrok-free.app//api/collections/posts/records?sort=@random&perPage=" +
+        "https://0cf4-2607-fea8-d5c3-7d80-9d0-c0e4-deda-8c8f.ngrok-free.app/api/collections/posts/records?sort=@random&perPage=" +
           count,
         {
           headers: {

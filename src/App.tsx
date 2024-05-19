@@ -37,13 +37,13 @@ const Main = () => {
 
   useEffect(() => {
     const postRect = {
-      x: 500,
-      y: 400,
+      x: 600,
+      y: 600,
     };
 
     const gridSize = {
-      x: 10,
-      y: 10,
+      x: 11,
+      y: 11,
     };
 
     const GetPosts = async (count: number) => {
@@ -98,10 +98,12 @@ const Main = () => {
               id,
               body,
               user,
+              image,
             }: {
               id: number;
               body: string;
               user: string;
+              image: string;
             }) => {
               const nodeId = getId();
 
@@ -110,9 +112,14 @@ const Main = () => {
               nodeData[id] = {
                 id: nodeId,
                 type: "post",
-                data: { postStyle: "text", text: body, user: user },
+                data: {
+                  postStyle: image !== "" ? "image" : "text",
+                  text: body,
+                  user: user,
+                  image: image,
+                  id: id,
+                },
                 position: { x: 0, y: 0 },
-                user: user,
               };
 
               return id;

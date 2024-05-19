@@ -14,12 +14,13 @@ export type PostData = {
   image?: string;
   text: string;
   user: string;
+  id: string;
 };
 
 // Post Component
 const Post = (props: NodeProps<PostData>) => {
   // Destructure Post Data
-  const [{ postStyle, name, avatar, image, text, user }, setRealData] =
+  const [{ id, postStyle, name, avatar, image, text, user }, setRealData] =
     useState({ ...props.data, name: "", avatar: profilePic });
 
   useEffect(() => {
@@ -41,7 +42,12 @@ const Post = (props: NodeProps<PostData>) => {
               users.items[0].avatar,
             text: text,
             user: user,
-            image: image,
+            image:
+              "http://127.0.0.1:8090/api/files/ty1dhzrx959f82n/" +
+              id +
+              "/" +
+              image,
+            id: id,
           });
         });
     };
@@ -56,7 +62,12 @@ const Post = (props: NodeProps<PostData>) => {
       {postStyle == "profile" ? (
         <ProfilePost />
       ) : postStyle == "image" ? (
-        <ImagePost image={image ? image : ""} />
+        <ImagePost
+          name={name}
+          avatar={avatar}
+          text={text}
+          image={image ? image : ""}
+        />
       ) : postStyle == "text" ? (
         <TextPost name={name} avatar={avatar} text={text} />
       ) : (
@@ -119,7 +130,17 @@ const TextPost = ({
   );
 };
 
-const ImagePost = ({ image }: { image: string }) => {
+const ImagePost = ({
+  image,
+  name,
+  text,
+  avatar,
+}: {
+  image: string;
+  name: string;
+  text: string;
+  avatar: string;
+}) => {
   return (
     <div className="img-post">
       <div className="img-post-img-container">
@@ -127,13 +148,11 @@ const ImagePost = ({ image }: { image: string }) => {
       </div>
       <div className="image-footer">
         <div className="image-post-profile-container">
-          <img src={profilePic} />
+          <img src={avatar} />
         </div>
         <div className="image-text">
-          <div className="image-user">Hailey Kinsella</div>
-          <div className="image-caption">
-            I LOVE DISNEY PRINCESSSS YAY SO MUCH
-          </div>
+          <div className="image-user">{name}</div>
+          <div className="image-caption">{text}</div>
         </div>
       </div>
     </div>
